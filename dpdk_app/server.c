@@ -67,6 +67,9 @@ void run_server(int *ht_log, struct rte_mempool **l2fwd_pktmbuf_pool)
 			port_index = (port_index + 1) % num_active_ports;
 			continue;
 		}
+		else {
+			printf("Received no of packets: %d\n", nb_rx_new);
+		}
 	
 		nb_rx[port_id] += nb_rx_new;
 		

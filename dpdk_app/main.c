@@ -79,7 +79,7 @@ main(int argc, char **argv)
 	ret = rte_eal_init(argc, argv);
 	CPE(ret < 0, "Invalid EAL arguments\n");
 
-	//CPE(rte_pmd_init_all() < 0, "Cannot init pmd\n");	// Not needed in DPDK 1.7
+//	CPE(rte_pmd_init_all() < 0, "Cannot init pmd\n");	// Not needed in DPDK 1.7
 	CPE(rte_eal_pci_probe() < 0, "Cannot probe PCI\n");
 
 	nb_ports = rte_eth_dev_count();

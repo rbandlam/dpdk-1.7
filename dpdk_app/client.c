@@ -5,15 +5,15 @@
 void run_client(int client_id, int *ht_log, struct rte_mempool **l2fwd_pktmbuf_pool)
 {
 	// [xia-router0 - xge0,1,2,3], [xia-router1 - xge0,1,2,3]
-	LL src_mac_arr[2][4] = {{0x36d3bd211b00, 0x37d3bd211b00, 0xa8d6a3211b00, 0xa9d6a3211b00},
-							{0x44d7a3211b00, 0x45d713211b00, 0x0ad7a3211b00, 0x0bd7a3211b00}};
-
+	LL dst_mac_arr[2][4] = {{0xaa5b2a9f36a0, 0xaa5b2a9f36a0, 0xaa5b2a9f36a0, 0xaa5b2a9f36a0},
+							{0xaa5b2a9f36a0, 0xaa5b2a9f36a0, 0xaa5b2a9f36a0, 0xaa5b2a9f36a0}};
 	// [xia-router2 - xge0,1,4,5], [xia-router2 - xge2,3,6,7]
-	LL dst_mac_arr[2][4] = {{0x6c10bb211b00, 0x6d10bb211b00, 0xc8a610ca0568, 0xc9a610ca0568},
-							{0x64d2bd211b00, 0x65d2bd211b00, 0xa2a610ca0568, 0xa3a610ca0568}};
+	LL src_mac_arr[2][4] = {{0x8c5e2a9f36a0, 0x8c5e2a9f36a0, 0x8c5e2a9f36a0, 0x8c5e2a9f36a0},
+							{0x8c5e2a9f36a0, 0x8c5e2a9f36a0, 0x8c5e2a9f36a0, 0x8c5e2a9f36a0}};
 
 	// Even cores take xge0,1. Odd cores take xge2, xge3
-	int lcore_to_port[12] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+	//int lcore_to_port[12] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+	int lcore_to_port[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	int i;
 
@@ -99,6 +99,9 @@ void run_client(int client_id, int *ht_log, struct rte_mempool **l2fwd_pktmbuf_p
 			int nb_rx_new = rte_eth_rx_burst(port_id, queue_id, rx_pkts_burst, MAX_CLT_RX_BURST);
 			if(nb_rx_new == 0) {
 				break;
+			}
+			else {
+				printf("Received: %d\n", nb_rx_new);
 			}
 
 			nb_rx += nb_rx_new;
